@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".screen.HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="55dp"
+                android:text="@string/skillcinema"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/text_name_premier"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="47dp"
+                android:text="Премьеры"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_premier"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_name_premier" />
+
+            <TextView
+                android:id="@+id/text_all_premier"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginEnd="36dp"
+                android:gravity="center"
+                android:text="Все"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_name_premier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/text_name_premier"
+                app:layout_constraintTop_toTopOf="@+id/text_name_premier"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/text_name_popular"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginStart="36dp"
+                android:text="Популярное"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/recycler_view_premier"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_premier" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_popular"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_name_popular" />
+
+            <TextView
+                android:id="@+id/text_all_popular"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginEnd="36dp"
+                android:gravity="center"
+                android:text="Все"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_name_popular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/text_name_popular"
+                app:layout_constraintTop_toTopOf="@+id/text_name_popular"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/text_name_detectives"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginStart="36dp"
+                android:text="Российские Детективы"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/recycler_view_popular"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_popular" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_detectives"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_name_detectives" />
+
+            <TextView
+                android:id="@+id/text_all_detectives"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginEnd="36dp"
+                android:gravity="center"
+                android:text="Все"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_name_detectives"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/text_name_detectives"
+                app:layout_constraintTop_toTopOf="@+id/text_name_detectives"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/text_name_top"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginStart="36dp"
+                android:text="Топ-250"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/recycler_view_detectives"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_detectives" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_top"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_name_top" />
+
+            <TextView
+                android:id="@+id/text_all_top"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginEnd="36dp"
+                android:gravity="center"
+                android:text="Все"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_name_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/text_name_top"
+                app:layout_constraintTop_toTopOf="@+id/text_name_top"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/text_name_dram"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginStart="36dp"
+                android:text="Советские Драмы"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/recycler_view_top"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_top" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_dram"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_name_dram" />
+
+            <TextView
+                android:id="@+id/text_all_dram"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginEnd="36dp"
+                android:gravity="center"
+                android:text="Все"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_name_dram"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/text_name_dram"
+                app:layout_constraintTop_toTopOf="@+id/text_name_dram"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/text_name_ser"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginStart="36dp"
+                android:text="Сериалы"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/recycler_view_dram"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_dram" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_ser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_name_ser" />
+
+            <TextView
+                android:id="@+id/text_all_ser"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginEnd="36dp"
+                android:gravity="center"
+                android:text="Все"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_name_ser"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/text_name_ser"
+                app:layout_constraintTop_toTopOf="@+id/text_name_ser"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</RelativeLayout>
