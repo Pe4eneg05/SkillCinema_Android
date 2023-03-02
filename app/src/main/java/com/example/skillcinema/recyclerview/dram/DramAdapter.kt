@@ -10,8 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.skillcinema.databinding.MovieItemBinding
 import com.example.skillcinema.entity.FilmsSerDramDet
 import com.example.skillcinema.recyclerview.MovieViewHolder
+import com.example.skillcinema.recyclerview.typeScreen
 
-class DramAdapter : RecyclerView.Adapter<MovieViewHolder>() {
+class DramAdapter (val onClick: (FilmsSerDramDet) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
 
     private var data: List<FilmsSerDramDet> = emptyList()
 
@@ -41,6 +42,12 @@ class DramAdapter : RecyclerView.Adapter<MovieViewHolder>() {
                 Glide.with(poster.context)
                     .load(it.posterUrlPreview)
                     .into(poster)
+            }
+        }
+        holder.binding.root.setOnClickListener {
+            item?.let {
+                onClick(item)
+                typeScreen = true
             }
         }
     }

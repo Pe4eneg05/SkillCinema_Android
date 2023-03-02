@@ -10,6 +10,7 @@ import com.example.skillcinema.databinding.MovieItemBinding
 import com.example.skillcinema.entity.FilmsPremier
 import com.example.skillcinema.entity.FilmsSerDramDet
 import com.example.skillcinema.recyclerview.MovieViewHolder
+import com.example.skillcinema.recyclerview.typeScreen
 
 class SerPagedAdapter (val onClick: (FilmsSerDramDet) -> Unit) : PagingDataAdapter<FilmsSerDramDet, MovieViewHolder>(DiffUtilCallback()) {
 
@@ -39,6 +40,7 @@ class SerPagedAdapter (val onClick: (FilmsSerDramDet) -> Unit) : PagingDataAdapt
         holder.binding.root.setOnClickListener {
             item?.let {
                 onClick(item)
+                typeScreen = false
             }
         }
     }

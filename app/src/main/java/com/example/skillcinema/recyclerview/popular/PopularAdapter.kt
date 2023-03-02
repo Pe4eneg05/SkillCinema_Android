@@ -11,8 +11,9 @@ import com.example.skillcinema.databinding.MovieItemBinding
 import com.example.skillcinema.entity.FilmsSerDramDet
 import com.example.skillcinema.entity.FilmsTopPopular
 import com.example.skillcinema.recyclerview.MovieViewHolder
+import com.example.skillcinema.recyclerview.typeScreen
 
-class PopularAdapter : RecyclerView.Adapter<MovieViewHolder>() {
+class PopularAdapter (val onClick: (FilmsTopPopular) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
 
     private var data: List<FilmsTopPopular> = emptyList()
 
@@ -42,6 +43,12 @@ class PopularAdapter : RecyclerView.Adapter<MovieViewHolder>() {
                 Glide.with(poster.context)
                     .load(it.posterUrlPreview)
                     .into(poster)
+            }
+        }
+        holder.binding.root.setOnClickListener {
+            item?.let {
+                onClick(item)
+                typeScreen = true
             }
         }
     }

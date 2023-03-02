@@ -11,8 +11,9 @@ import com.bumptech.glide.Glide
 import com.example.skillcinema.databinding.MovieItemBinding
 import com.example.skillcinema.entity.FilmsSerDramDet
 import com.example.skillcinema.recyclerview.MovieViewHolder
+import com.example.skillcinema.recyclerview.typeScreen
 
-class DetectivesAdapter : RecyclerView.Adapter<MovieViewHolder>() {
+class DetectivesAdapter (val onClick: (FilmsSerDramDet) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
 
     private var data: List<FilmsSerDramDet> = emptyList()
 
@@ -33,15 +34,22 @@ class DetectivesAdapter : RecyclerView.Adapter<MovieViewHolder>() {
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = data.getOrNull(position)
-        with(holder.binding){
+        with(holder.binding) {
             textTitle.text = item?.nameRu ?: ""
             textGenre.text = item?.genres?.first()?.genre
-            if (item?.ratingKinopoisk == null || item.ratingKinopoisk.toString() == "") textRating.isVisible = false
+            if (item?.ratingKinopoisk == null || item.ratingKinopoisk.toString() == "") textRating.isVisible =
+                false
             else textRating.text = item.ratingKinopoisk.toString()
             item?.let {
                 Glide.with(poster.context)
                     .load(it.posterUrlPreview)
                     .into(poster)
+            }
+        }
+        holder.binding.root.setOnClickListener {
+            item?.let {
+                onClick(item)
+                typeScreen = true
             }
         }
     }

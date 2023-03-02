@@ -2,6 +2,7 @@ package com.example.skillcinema.screen
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.skillcinema.R
 import com.example.skillcinema.databinding.ActivityMainBinding
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.activity_in, R.anim.activity_out)
         transaction.replace(R.id.container, fragment)
         transaction.commit()
     }

@@ -10,12 +10,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.skillcinema.entity.FilmsPremier
-import com.example.skillcinema.entity.FilmsSerDramDet
-import com.example.skillcinema.entity.FilmsTopPopular
-import com.example.skillcinema.entity.MovieInfo
+import com.example.skillcinema.entity.*
+import com.example.skillcinema.recyclerview.allfilms.AllFilmsPagedSource
 import com.example.skillcinema.recyclerview.detectives.DetectivesPagedSource
 import com.example.skillcinema.recyclerview.dram.DramPagedSource
+import com.example.skillcinema.recyclerview.image.ImagePagedSource
 import com.example.skillcinema.recyclerview.popular.PopularPagedSource
 import com.example.skillcinema.recyclerview.ser.SerPagedSource
 import com.example.skillcinema.recyclerview.top.TopPagedSource
@@ -30,6 +29,15 @@ class MoviePagedListViewModel private constructor(
     private val repository: MoviePagedListRepository
 ) : ViewModel() {
     constructor() : this(MoviePagedListRepository())
+
+    private val _actors = MutableStateFlow<List<ActorsList>>(emptyList())
+    val actors = _actors.asStateFlow()
+
+    private val _directors = MutableStateFlow<List<ActorsList>>(emptyList())
+    val directors = _directors.asStateFlow()
+
+    private val _similar = MutableStateFlow<List<SimilarItems>>(emptyList())
+    val similar = _similar.asStateFlow()
 
     private val _filmsSer = MutableStateFlow<List<FilmsSerDramDet>>(emptyList())
     private val _filmsDram = MutableStateFlow<List<FilmsSerDramDet>>(emptyList())
@@ -52,11 +60,59 @@ class MoviePagedListViewModel private constructor(
         loadFilmsTop()
         loadFilmsPopular()
         loadFilmsPremier()
+
+        loadActors()
+        loadSimilar()
+        loadDirectors()
+    }
+
+    suspend fun infoStaff(url: String): StaffInfo {
+        return MoviePagedListRepository().getStaffInfo(url)
     }
 
     suspend fun infoMovie(url: String): MovieInfo {
         return MoviePagedListRepository().getMovieInfo(url)
     }
+
+    //Метод получения похожих фильмов
+    private fun loadSimilar() {
+        val urlImage = "/api/v2.2/films/${idFilm}/similars"
+        viewModelScope.launch(Dispatchers.IO) {
+            kotlin.runCatching {
+                repository.getSimilarList(urlImage)
+            }.fold(
+                onSuccess = { _similar.value = it },
+                onFailure = { Log.d("similar", it.message ?: "") }
+            )
+        }
+    }
+
+
+    //Метод получения режиссерского состава
+    private fun loadDirectors() {
+        viewModelScope.launch(Dispatchers.IO) {
+            kotlin.runCatching {
+                repository.getActorsList(idFilm)
+            }.fold(
+                onSuccess = { _directors.value = it },
+                onFailure = { Log.d("directors", it.message ?: "") }
+            )
+        }
+    }
+
+
+    //Метод получения списка актеров
+    private fun loadActors() {
+        viewModelScope.launch(Dispatchers.IO) {
+            kotlin.runCatching {
+                repository.getActorsList(idFilm)
+            }.fold(
+                onSuccess = { _actors.value = it },
+                onFailure = { Log.d("actors", it.message ?: "") }
+            )
+        }
+    }
+
 
     //Методы получения списков для главного экрана(20 шт.)
     private fun loadFilmsSer() {
@@ -125,6 +181,20 @@ class MoviePagedListViewModel private constructor(
             )
         }
     }
+
+
+    val pagedAllFilms: Flow<PagingData<FilmsAll>> = Pager(
+        config = PagingConfig(pageSize = 5),
+        pagingSourceFactory = { AllFilmsPagedSource() }
+    ).flow.cachedIn(viewModelScope)
+
+
+    //Получение списка фотографий
+    val pagedImage: Flow<PagingData<PhotoItems>> = Pager(
+        config = PagingConfig(pageSize = 5),
+        pagingSourceFactory = { ImagePagedSource() }
+    ).flow.cachedIn(viewModelScope)
+
 
     //Переменные для получения списков для экрана AllMovies
     val pagedPopular: Flow<PagingData<FilmsTopPopular>> = Pager(

@@ -20,6 +20,7 @@ import com.example.skillcinema.recyclerview.*
 import com.example.skillcinema.recyclerview.detectives.DetectivesPagedAdapter
 import com.example.skillcinema.recyclerview.dram.DramPagedAdapter
 import com.example.skillcinema.recyclerview.popular.PopularPagedAdapter
+import com.example.skillcinema.recyclerview.premier.PremierAdapter
 import com.example.skillcinema.recyclerview.premier.PremierPagedAdapter
 import com.example.skillcinema.recyclerview.ser.SerPagedAdapter
 import com.example.skillcinema.recyclerview.top.TopPagedAdapter
@@ -56,50 +57,69 @@ class AllMoviesFragment : Fragment() {
 
         binding.titleAll.text = typeAllFilms
 
-        pagedAdapterPremier =  PremierPagedAdapter { onClickPhotoPremier(it, it.kinopoiskId) }
-        pagedAdapterPopular =  PopularPagedAdapter { onClickPhotoTopPopular(it, it.filmId) }
-        pagedAdapterDetectives = DetectivesPagedAdapter { onClickPhotoSerDramDet(it, it.kinopoiskId) }
-        pagedAdapterTop =  TopPagedAdapter { onClickPhotoTopPopular(it, it.filmId) }
-        pagedAdapterDram =  DramPagedAdapter { onClickPhotoSerDramDet(it, it.kinopoiskId) }
-        pagedAdapterSer =  SerPagedAdapter { onClickPhotoSerDramDet(it, it.kinopoiskId) }
+        when (typeAllFilms) {
 
-        viewModel.pagedPopular.onEach {
-            pagedAdapterPopular.submitData(it)
-        }.launchIn(lifecycleScope)
+            "Премьеры" -> {
 
-        viewModel.filmsPremier.onEach {
-            pagedAdapterPremier.setData(it)
-        }.launchIn(lifecycleScope)
+                val pagedAdapterPremier =  PremierPagedAdapter { onClickPhotoPremier(it, it.kinopoiskId) }
 
-        viewModel.pagedDetectives.onEach {
-            pagedAdapterDetectives.submitData(it)
-        }.launchIn(lifecycleScope)
+                viewModel.filmsPremier.onEach {
+                    pagedAdapterPremier.setData(it)
+                }.launchIn(lifecycleScope)
 
-        viewModel.pagedTop.onEach {
-            pagedAdapterTop.submitData(it)
-        }.launchIn(lifecycleScope)
+                binding.recyclerViewAll.adapter = pagedAdapterPremier
+            }
 
-        viewModel.pagedDram.onEach {
-            pagedAdapterDram.submitData(it)
-        }.launchIn(lifecycleScope)
+            "Популярное" -> {
 
-        viewModel.pagedSer.onEach {
-            pagedAdapterSer.submitData(it)
-        }.launchIn(lifecycleScope)
+                val pagedAdapterPopular =  PopularPagedAdapter { onClickPhotoTopPopular(it, it.filmId) }
 
-        when (binding.titleAll.text) {
+                viewModel.pagedPopular.onEach {
+                    pagedAdapterPopular.submitData(it)
+                }.launchIn(lifecycleScope)
 
-            "Премьеры" -> binding.recyclerViewAll.adapter = pagedAdapterPremier
+                binding.recyclerViewAll.adapter = pagedAdapterPopular
+            }
+            "Российские детективы" -> {
 
-            "Популярное" -> binding.recyclerViewAll.adapter = pagedAdapterPopular
+                val pagedAdapterDetectives = DetectivesPagedAdapter { onClickPhotoSerDramDet(it, it.kinopoiskId) }
 
-            "Российские детективы" -> binding.recyclerViewAll.adapter = pagedAdapterDetectives
+                viewModel.pagedDetectives.onEach {
+                    pagedAdapterDetectives.submitData(it)
+                }.launchIn(lifecycleScope)
 
-            "Топ-250" -> binding.recyclerViewAll.adapter = pagedAdapterTop
+                binding.recyclerViewAll.adapter = pagedAdapterDetectives
+            }
+            "Топ-250" -> {
 
-            "Советские драмы" -> binding.recyclerViewAll.adapter = pagedAdapterDram
+                val pagedAdapterTop =  TopPagedAdapter { onClickPhotoTopPopular(it, it.filmId) }
 
-            "Сериалы" -> binding.recyclerViewAll.adapter = pagedAdapterSer
+                viewModel.pagedTop.onEach {
+                    pagedAdapterTop.submitData(it)
+                }.launchIn(lifecycleScope)
+
+                binding.recyclerViewAll.adapter = pagedAdapterTop
+            }
+            "Советские драмы" -> {
+
+                val pagedAdapterDram =  DramPagedAdapter { onClickPhotoSerDramDet(it, it.kinopoiskId) }
+
+                viewModel.pagedDram.onEach {
+                    pagedAdapterDram.submitData(it)
+                }.launchIn(lifecycleScope)
+
+                binding.recyclerViewAll.adapter = pagedAdapterDram
+            }
+            "Сериалы" -> {
+
+                val pagedAdapterSer =  SerPagedAdapter { onClickPhotoSerDramDet(it, it.kinopoiskId) }
+
+                viewModel.pagedSer.onEach {
+                    pagedAdapterSer.submitData(it)
+                }.launchIn(lifecycleScope)
+
+                binding.recyclerViewAll.adapter = pagedAdapterSer
+            }
         }
     }
 
@@ -118,6 +138,7 @@ class AllMoviesFragment : Fragment() {
 
     private fun loadFragment(fragment: Fragment) {
         val transaction = fragmentManager?.beginTransaction()
+        transaction?.setCustomAnimations(R.anim.activity_in, R.anim.activity_out)
         transaction?.replace(R.id.container, fragment)
         transaction?.commit()
     }
