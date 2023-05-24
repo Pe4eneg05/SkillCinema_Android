@@ -18,3 +18,15 @@
 Список фильмов для пользователя по его предпочтениям.
 
 ----------------В РАЗРАБОТКЕ----------------
+
+![photo_5242284988571962501_y](https://github.com/Pe4eneg05/SkillCinema_Android/assets/125829710/f63c8611-d596-4b96-9da5-5a33381e7443)
+
+![photo_5242284988571962500_y](https://github.com/Pe4eneg05/SkillCinema_Android/assets/125829710/b85987b0-6d2c-4ce9-96cb-30ee44782be9)
+
+![photo_5242284988571962502_y](https://github.com/Pe4eneg05/SkillCinema_Android/assets/125829710/b816fabd-cfc2-4ae0-a68c-cad139426834)
+
+![photo_5242284988571962503_y](https://github.com/Pe4eneg05/SkillCinema_Android/assets/125829710/ff16f8f3-7f7f-4404-84af-bd73ec8e22c8)
+
+![photo_5242284988571962504_y](https://github.com/Pe4eneg05/SkillCinema_Android/assets/125829710/b9a1fce7-3c88-4194-96da-002ab14d0145)
+
+![photo_5242284988571962505_y](https://github.com/Pe4eneg05/SkillCinema_Android/assets/125829710/5c88e2b3-1995-4c59-a0e5-a524a1ce40db)
